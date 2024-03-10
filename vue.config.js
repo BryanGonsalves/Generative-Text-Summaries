@@ -1,5 +1,11 @@
 module.exports = {
     devServer: {
-      allowedHosts: "all"
+      allowedHosts: "all",
+      proxy: {
+        '/summary': {
+          target: "http://localhost:5000/",
+          changeOrigin: true
+        }
+      }
     }
   }
