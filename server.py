@@ -7,12 +7,16 @@ app = Flask(__name__)
 client = OpenAI(api_key="YOUR_SECRET_KEY_API")
 @app.route('/summary', methods=['POST'])
 @app.route('/summary', methods=['POST'])
+@app.route('/summary', methods=['POST'])
 def get_summary():
-    text = request.get_json()['text']
-    persona = 'High-school English teacher'
+    data = request.get_json()
+    text = data['text']
+    wordCount = 100
+    persona = data['persona']
     prompt = f"Create the summary of the following text: {text}"
     response = client.chat.completions.create(
         model='gpt-4',
+        max_tokens= int(wordCount * 1.25),
         messages=[
             {
                 'role': 'system',
@@ -21,7 +25,11 @@ def get_summary():
             {
                 'role': 'user',
                 'content': prompt
-            }
+            },
+           {
+               'role': 'system',
+               'content': f'Keep the summary length strictly around {wordCount} words.'
+           }
         ]
     )
     return response.choices[0].message.content
