@@ -1,5 +1,7 @@
 <template>
-  <h1>Hello World!</h1>
+<h1>Summerizer</h1>
+<p>Welcome to Summarizer! Insert your text below to get summarized.</p>
+
 </template>
 
 <script>
