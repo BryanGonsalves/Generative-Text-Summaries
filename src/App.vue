@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'App',
   data() {
@@ -24,8 +25,13 @@ export default {
           this.input = "",
           this.output = ""
       },
-      createSummary() {
-          this.output = this.input
+      async createSummary() {
+          try {
+              let response = await axios.post("http://127.0.0.1:5000/", {'text' : this.input})
+              this.output = response.data
+          } catch (error) {
+              this.output = error
+          }
       }
   }
 }
