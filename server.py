@@ -6,12 +6,10 @@ from openai import OpenAI
 app = Flask(__name__)
 client = OpenAI(api_key="YOUR_SECRET_KEY_API")
 @app.route('/summary', methods=['POST'])
-@app.route('/summary', methods=['POST'])
-@app.route('/summary', methods=['POST'])
 def get_summary():
     data = request.get_json()
     text = data['text']
-    wordCount = 100
+    wordCount = data['wordCount']
     persona = data['persona']
     prompt = f"Create the summary of the following text: {text}"
     response = client.chat.completions.create(
